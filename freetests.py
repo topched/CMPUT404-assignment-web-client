@@ -148,7 +148,7 @@ class TestHTTPClient(unittest.TestCase):
         self.assertTrue(req.code == 200)
         self.assertTrue(req.body.find(path)>=0, "Data: [%s] " % req.body)
 
-    # consider disabling this test until everything else works
+    #consider disabling this test until everything else works
     def testInternetGets(self):
         '''Test HTTP Get in the wild, these webservers are far less
            forgiving'''
