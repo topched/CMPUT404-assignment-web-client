@@ -113,8 +113,7 @@ class HTTPClient(object):
         self.socket.sendall("\r\n")
         read = self.recvall(self.socket)
 
-
-        self.socket.close()
+        #self.socket.close()
 
         body = self.get_body(read)
         code = self.get_code(read)
@@ -136,18 +135,17 @@ class HTTPClient(object):
         self.socket.sendall("POST %s HTTP/1.1\r\n" % info.path)
         self.socket.sendall("Host: %s\r\n" % info.host)
         self.socket.sendall("Content-type: application/x-www-form-encoded\r\n")
-        self.socket.sendall("Connection: close\r\n")
 
         if args != None:
             arg = urllib.urlencode(args)
             self.socket.sendall("Content-length: %s\r\n\r\n" % str(len(arg)))
-            self.socket.sendall("%s\r\n" % arg)
-
-        self.socket.sendall("\r\n")
+            self.socket.sendall("%s\r\n\r\n" % arg)
+        else:
+            self.socket.sendall("\r\n")
 
         read = self.recvall(self.socket)
 
-        self.socket.close()
+        #self.socket.close()
 
         code = self.get_code(read)
         body = self.get_body(read)
